@@ -1,3 +1,5 @@
+*.txt
+
 # never add models
 *.h5
 *.pt
