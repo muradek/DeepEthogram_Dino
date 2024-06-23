@@ -186,6 +186,10 @@ def add_label_to_project(path_to_labels: Union[str, os.PathLike], path_to_video)
         # df2 = pd.DataFrame(data=is_background, columns=['background'])
         # df = pd.concat([df2, df], axis=1)
         df = pd.DataFrame(data=data, columns=['background'] + list(df.columns))
+        
+    # These lines were missing so there was a bug here // MURAD
+    if 'label' not in label_dst:
+        label_dst = label_dst.split('.csv')[0] + '_labels.csv'
 
     df.to_csv(label_dst)
     record = parse_subdir(viddir)
