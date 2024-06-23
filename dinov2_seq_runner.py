@@ -42,7 +42,7 @@ class Train():
     
     def CopyModelsBackbone(self):
         try:
-            src = '/home/ofer.nissim/DeepEthogram_SchillersLab_v1-1/MODELS_BACKBONE/pretrained_models'
+            src = 'H:\Models_deepEthogram\MODELS_BACKBONE\pretrained_models'
             dst = self.project_config['project']['path'] + '/models/pretrained_models'
             shutil.copytree(src, dst)
             print("Directory backbone pretrained models copied successfully!")
@@ -212,7 +212,7 @@ def main():
     parser.add_argument('--Exist_path', type = str, default= None, help = 'If the project already exist then take the path to it')
     
     # arguments from the user
-    parser.add_argument('--labeled_data_path', type=str, default= '/home/ofer.nissim/DeepEthogram_SchillersLab_v1-1/Dataset_deepethogram_28_12',
+    parser.add_argument('--labeled_data_path', type=str, default= 'C:/Users/Jackie.MEDICINE/Desktop/New_folder_small',
                         help='the path to the data')
     parser.add_argument('--exp_name', type=str, default= '', help='the name to add to the experiment')
     
@@ -229,7 +229,7 @@ def main():
                         help='if true, first trains the spatial CNN, then the flow CNN, and finally the two jointly end-to-end')
     
     # sequence parameters 
-    parser.add_argument('--num_epochs_S', type=int, default= 100, help='the num of epochs')
+    parser.add_argument('--num_epochs_S', type=int, default= 10, help='the num of epochs') # default was 100
     parser.add_argument('--rnn_style_S', type=str, default= 'lstm', help='can be from these options: rnn, gru, lstm')
     
     args = parser.parse_args()
@@ -247,8 +247,8 @@ def main():
             'BackPerch',
             'Table']
     
-    save_proj_path = '/home/ofer.nissim/DeepEthogram_SchillersLab_v1-1/Models_results_deepEto/'
-    backboneWeightspath = '/home/ofer.nissim/DeepEthogram_SchillersLab_v1-1/MODELS_BACKBONE/pretrained_models'
+    save_proj_path = "F:/Murad" 
+    backboneWeightspath = "H:/Models_deepEthogram/MODELS_BACKBONE/pretrained_models"
     
     # create object 
     trainer = Train(args, 
@@ -258,7 +258,7 @@ def main():
     
     trainer.initialization()
     trainer.inference_encoder()
-    trainer.train_sequence()
+    trainer.train_sequence() # this function failes to find labels 
     trainer.inference_sequence()
     trainer.postprocessing()
 
